@@ -7,12 +7,20 @@ import { HttpModule } from '@angular/http';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductCreateComponent } from './product/product-create/product-create.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { IndexComponent } from './index/index.component';
+import { RestaurantComponent } from './restaurant/restaurant.component';
+import { ClientComponent } from './client/client.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
-    ProductCreateComponent
+    ProductCreateComponent,
+    LoginComponent,
+    IndexComponent,
+    RestaurantComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,
