@@ -7,6 +7,18 @@ var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 // The database variable
 var database;
+
+//sha1
+var sha1 = require('sha1');
+
+//cors
+var cors = require('cors');
+
+//mail
+var nodemailer = require('nodemailer');
+const { async } = require("rxjs/internal/scheduler/async");
+const { getMaxListeners } = require("process");
+
 // The products collection
 var PRODUCTS_COLLECTION = "products";
 
@@ -16,6 +28,7 @@ var app = express();
 // Define the JSON parser as a default way 
 // to consume and produce data through the 
 // exposed APIs
+app.use(cors({origin: "*"}));
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
@@ -118,7 +131,7 @@ app.delete("/api/products/:id", function (req, res) {
 
 
 //Get all user
-app.get("/api/users", function (req, res) {
+app.get("/api/user", function (req, res) {
     database.collection('user').find({}).toArray(function (error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
@@ -128,7 +141,7 @@ app.get("/api/users", function (req, res) {
     });
 });
 //Get all resto ekaly
-app.get("/api/users/restos-ekaly", function (req, res) {
+app.get("/api/user/restos-ekaly", function (req, res) {
     database.collection('user').find({profil:"resto",ekaly:"oui"}).toArray(function (error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
@@ -138,7 +151,7 @@ app.get("/api/users/restos-ekaly", function (req, res) {
     });
 });
 //Get all resto 
-app.get("/api/users/restos", function (req, res) {
+app.get("/api/user/restos", function (req, res) {
     database.collection('user').find({profil:"resto"}).toArray(function (error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
@@ -169,7 +182,7 @@ app.get("/api/plats/:id_resto", function (req, res) {
 
 
 //Login
-app.post("/api/users/login", function (req, res) {
+app.post("/api/user/login", function (req, res) {
     var user = req.body;
     console.log(user.email);
     console.log(user.mdp);
@@ -180,19 +193,20 @@ app.post("/api/users/login", function (req, res) {
 });
 
 
-
-//Insert user
-app.post("/api/users", function (req, res) {
+//Inscription
+app.post("/api/user", function (req, res) {
     var user = req.body;
-
+    user.mdp=sha1(user.mdp);
     if (!user.nom) {
-        manageError(res, "Invalid product input", "Name is mandatory.", 400);
-    } else if (!user.prenom) {
-        manageError(res, "Invalid product input", "Brand is mandatory.", 400);
+        manageError(res, "Nom invalide", "Name is mandatory.", 400);
+    } else if (!user.email) {
+        manageError(res, "Email invalide", "Email is mandatory.", 400);
+    } else if (!user.mdp) {
+        manageError(res, "Mot de passe invalide", "Mdp is mandatory.", 400);
     } else {
         database.collection('user').insertOne(user, function (err, doc) {
             if (err) {
-                manageError(res, err.message, "Failed to create new product.");
+                manageError(res, err.message, "Failed to create new account.");
             } else {
                 res.status(201).json(doc.ops[0]);
             }
@@ -200,13 +214,40 @@ app.post("/api/users", function (req, res) {
     }
 });
 
+//send mail
+app.post("/api/user/sendmail", function (req, res) {
+    var user = req.body;
+    sendMail(user,info=>{
+        console.log('mail envoyer avec succes');
+        res.send(info);
+    });
+});
 
+async function sendMail(user, callback) {
+    var transporter =nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth:{
+            user: 'shajaniri@gmail.com',
+            pass: 'kile ruan#1'
+        }
+    });
+    let mailOptions={
+        from: 'shajaniri@gmail.com',
+        to:user.email,
+        subject:"Validation compte E-kaly",
+        html:'<h1>Valider compte</h1></a><br><h3>merci de nous avoir rejoint</h3>'
+    };
 
+    let info= await transporter.sendMail(mailOptions);
 
+    callback(info);
+}
 
 
 //Check mail exist
-app.get('/api/users/:mail', (req, res) => {
+app.get('/api/user/:mail', (req, res) => {
     var mail=req.params.mail;
     var ObjectId = require('mongodb').ObjectID;
     database.collection('user').findOne({ email: mail })

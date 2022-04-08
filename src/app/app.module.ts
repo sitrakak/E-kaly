@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { ClientComponent } from './client/client.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ClientComponent } from './client/client.component';
     LoginComponent,
     IndexComponent,
     RestaurantComponent,
-    ClientComponent
+    ClientComponent,
+    InscriptionComponent
   ],
   imports: [
     BrowserModule,

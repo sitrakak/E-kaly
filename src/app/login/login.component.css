@@ -1,38 +1,27 @@
 body{
-	background-position: 30% 0%;
+	background-color: #C2EEF9;
 }
 header{
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
+	height: 80px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 	transition: 0.6s;
 	background-color: white;
 	z-index: 100000;
 }
-header .logo {
-	padding-left: 8%;
-}
-header .logo img{
-	width: 130px;
-}
-header .rs{
-	float: right;
-	background-color: #B0E0E6;
-	border-radius: 20px;
-	margin-right: 10%;
-}
-header .rs img{
-	width: 35px;
-}
-header .rs .img1{
-	margin-right: 20px;
+.logo {
+	font-size: 40px;
+	font-family: Blackadder ITC;
+	color: #33D7FF;
+	text-decoration: none;
 }
 .lien{
-	margin-top: 120px;
+	margin-top: 80px;
 }
 .lien a{
 	font-family: cocogoose;
@@ -46,10 +35,9 @@ header .rs .img1{
 
 .connexion{
 	width: 400px;
-	height: 400px;
-	margin-top: 100px;
-	margin-left: 40%;
-	border-radius: 30px;
+	height: 350px;
+	margin-top: 150px;
+	margin-left: 35%;
 	background-color: white;
 	align-items: center;
 	justify-content: center;
@@ -61,7 +49,7 @@ header .rs .img1{
 .connexion input{
 	width: 80%;
 	border:none;
-	border-bottom: 1px solid teal;
+	border-bottom: 1px solid #33D7FF;
 	outline: none;
 }
 .connexion input,label{
@@ -71,7 +59,7 @@ header .rs .img1{
 	height: 50px;
 	font-size: 18px;
 	font-weight: bold;
-	background-color: teal;
+	background-color: #33D7FF;
 	border:none;
 	border-radius: 20px;
 	color: white;
@@ -82,12 +70,12 @@ header .rs .img1{
 }
 .connexion button:hover{
 	background-color: white;
-	border:1px solid teal;
-	color: teal;
+	border:1px solid #33D7FF;
+	color: #33D7FF;
 }
 .connexion h2,p,label{
 	text-align: center;
-	color: teal;
+	color: #33D7FF;
 	font-size: 20px;
 }
 .connexion h2:hover{
@@ -95,7 +83,7 @@ header .rs .img1{
 }
 .footer{
 	margin-bottom: -4px;
-	margin-top: 100px;
+	margin-top: 170px;
 	margin-left: 90%;
 	width: 6%;
 }
@@ -106,7 +94,7 @@ footer{
 }
 footer p{
 	padding:15px; 
-	color: #00CED1;
+	color: #33D7FF;
 }
 @media (max-width: 900px) {
 	footer p{
