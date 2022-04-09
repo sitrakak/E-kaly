@@ -35,6 +35,21 @@ export class UserService {
     }
 
     //send Mail
+    validercompte(email: string): Promise<any> {
+        return this.http.get(`${this.UsersUrl}/valider/${email}`)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.error);
+    }
+    //mail existant
+    mail(email: string): Promise<IUser> {
+        return this.http.get(`${this.UsersUrl}/${email}`)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.error);
+    }
+
+    //send Mail
     sendMail(User: User): Promise<IUser> {
         return this.http.post(`${this.UsersUrl}/sendmail`, User)
             .toPromise()

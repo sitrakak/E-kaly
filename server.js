@@ -28,7 +28,7 @@ var app = express();
 // Define the JSON parser as a default way 
 // to consume and produce data through the 
 // exposed APIs
-app.use(cors({origin: "*"}));
+app.use(cors({ origin: "*" }));
 app.use(bodyParser.json());
 
 // Create link to Angular build directory
@@ -44,45 +44,44 @@ const LOCAL_DATABASE = "mongodb+srv://sisi:Sitraka1@cluster0.1phmo.mongodb.net/E
 const LOCAL_PORT = 8080;
 
 // Init the server
-mongodb.MongoClient.connect(process.env.MONGODB_URI || LOCAL_DATABASE,
-    {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-    }, function (error, client) {
+mongodb.MongoClient.connect(process.env.MONGODB_URI || LOCAL_DATABASE, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+}, function(error, client) {
 
-        // Check if there are any problems with the connection to MongoDB database.
-        if (error) {
-            console.log(error);
-            process.exit(1);
-        }
+    // Check if there are any problems with the connection to MongoDB database.
+    if (error) {
+        console.log(error);
+        process.exit(1);
+    }
 
-        // Save database object from the callback for reuse.
-        database = client.db('E-kaly');
-        console.log("Database connection done.");
+    // Save database object from the callback for reuse.
+    database = client.db('E-kaly');
+    console.log("Database connection done.");
 
-        //const db = client.db('star-wars-quotes2')
-        //const quotesCollection = db.collection('quotes')
+    //const db = client.db('star-wars-quotes2')
+    //const quotesCollection = db.collection('quotes')
 
-        // Initialize the app.
-        var server = app.listen(process.env.PORT || LOCAL_PORT, function () {
-            var port = server.address().port;
-            console.log("App now running on port", port);
-        });
+    // Initialize the app.
+    var server = app.listen(process.env.PORT || LOCAL_PORT, function() {
+        var port = server.address().port;
+        console.log("App now running on port", port);
     });
+});
 
 /*  "/api/status"
  *   GET: Get server status
  *   PS: it's just an example, not mandatory
  */
-app.get("/api/status", function (req, res) {
+app.get("/api/status", function(req, res) {
     res.status(200).json({ status: "UP" });
 });
 
 /*  "/api/products"
  *  GET: finds all products
  */
-app.get("/api/products", function (req, res) {
-    database.collection('products').find({}).toArray(function (error, data) {
+app.get("/api/products", function(req, res) {
+    database.collection('products').find({}).toArray(function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {
@@ -94,7 +93,7 @@ app.get("/api/products", function (req, res) {
 /*  "/api/products"
  *   POST: creates a new product
  */
-app.post("/api/products", function (req, res) {
+app.post("/api/products", function(req, res) {
     var product = req.body;
 
     if (!product.name) {
@@ -102,7 +101,7 @@ app.post("/api/products", function (req, res) {
     } else if (!product.brand) {
         manageError(res, "Invalid product input", "Brand is mandatory.", 400);
     } else {
-        database.collection('products').insertOne(product, function (err, doc) {
+        database.collection('products').insertOne(product, function(err, doc) {
             if (err) {
                 manageError(res, err.message, "Failed to create new product.");
             } else {
@@ -115,11 +114,11 @@ app.post("/api/products", function (req, res) {
 /*  "/api/products/:id"
  *   DELETE: deletes product by id
  */
-app.delete("/api/products/:id", function (req, res) {
+app.delete("/api/products/:id", function(req, res) {
     if (req.params.id.length > 24 || req.params.id.length < 24) {
         manageError(res, "Invalid product id", "ID must be a single String of 12 bytes or a string of 24 hex characters.", 400);
     } else {
-        database.collection(PRODUCTS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+        database.collection(PRODUCTS_COLLECTION).deleteOne({ _id: new ObjectID(req.params.id) }, function(err, result) {
             if (err) {
                 manageError(res, err.message, "Failed to delete product.");
             } else {
@@ -131,8 +130,8 @@ app.delete("/api/products/:id", function (req, res) {
 
 
 //Get all resto ekaly
-app.get("/api/user/restos-ekaly", function (req, res) {
-    database.collection('user').find({profil:"resto",ekaly:"oui"}).toArray(function (error, data) {
+app.get("/api/user/restos-ekaly", function(req, res) {
+    database.collection('user').find({ profil: "resto", ekaly: "oui" }).toArray(function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {
@@ -141,8 +140,8 @@ app.get("/api/user/restos-ekaly", function (req, res) {
     });
 });
 //Get all resto 
-app.get("/api/user/restos", function (req, res) {
-    database.collection('user').find({profil:"resto"}).toArray(function (error, data) {
+app.get("/api/user/restos", function(req, res) {
+    database.collection('user').find({ profil: "resto" }).toArray(function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {
@@ -152,9 +151,9 @@ app.get("/api/user/restos", function (req, res) {
 });
 
 //nouveaux plats
-app.post("/api/plat", function (req, res) {
+app.post("/api/plat", function(req, res) {
     var plat = req.body;
-    database.collection('plat').insertOne(plat, function (err, doc) {
+    database.collection('plat').insertOne(plat, function(err, doc) {
         if (err) {
             manageError(res, err.message, "Failed to create new plat.");
         } else {
@@ -164,10 +163,10 @@ app.post("/api/plat", function (req, res) {
 });
 
 //Get all plat by resto 
-app.get("/api/plat/:idResto", function (req, res) {
-    var id=req.params.idResto;
+app.get("/api/plat/:idResto", function(req, res) {
+    var id = req.params.idResto;
     var ObjectId = require('mongodb').ObjectID;
-    database.collection('plat').find({ _id: ObjectId(id) },{ visible: true }).toArray(function (error, data) {
+    database.collection('plat').find({ _id: ObjectId(id) }, { visible: true }).toArray(function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {
@@ -177,9 +176,9 @@ app.get("/api/plat/:idResto", function (req, res) {
 });
 
 //Plat visible sur e-kaly
-app.out("/api/plat/:id", function (req, res) {
+app.get("/api/plat/:id", function(req, res) {
     var user = req.body;
-    database.collection('plat').updateOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
+    database.collection('plat').updateOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
         if (err) {
             manageError(res, err.message, "Failed to create new account.");
         } else {
@@ -191,8 +190,8 @@ app.out("/api/plat/:id", function (req, res) {
 
 
 //Get all user
-app.get("/api/user", function (req, res) {
-    database.collection('user').find({}).toArray(function (error, data) {
+app.get("/api/user", function(req, res) {
+    database.collection('user').find({}).toArray(function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {
@@ -202,11 +201,11 @@ app.get("/api/user", function (req, res) {
 });
 
 //Delete user
-app.delete("/api/user/:id", function (req, res) {
+app.delete("/api/user/:id", function(req, res) {
     if (req.params.id.length > 24 || req.params.id.length < 24) {
         manageError(res, "Invalid product id", "ID must be a single String of 12 bytes or a string of 24 hex characters.", 400);
     } else {
-        database.collection('user').deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+        database.collection('user').deleteOne({ _id: new ObjectID(req.params.id) }, function(err, result) {
             if (err) {
                 manageError(res, err.message, "Failed to delete product.");
             } else {
@@ -217,21 +216,21 @@ app.delete("/api/user/:id", function (req, res) {
 });
 
 //Login
-app.post("/api/user/login", function (req, res) {
+app.post("/api/user/login", function(req, res) {
     var user = req.body;
     console.log(user.email);
     console.log(user.mdp);
-    database.collection('user').findOne({ email: user.email,mdp:user.mdp })
+    database.collection('user').findOne({ email: user.email, mdp: user.mdp })
         .then(quotes => {
-          res.status(200).json(quotes);
+            res.status(200).json(quotes);
         })
 });
 
 
 //Inscription
-app.post("/api/user", function (req, res) {
+app.post("/api/user", function(req, res) {
     var user = req.body;
-    user.mdp=sha1(user.mdp);
+    user.mdp = sha1(user.mdp);
     if (!user.nom) {
         manageError(res, "Nom invalide", "Name is mandatory.", 400);
     } else if (!user.email) {
@@ -239,7 +238,7 @@ app.post("/api/user", function (req, res) {
     } else if (!user.mdp) {
         manageError(res, "Mot de passe invalide", "Mdp is mandatory.", 400);
     } else {
-        database.collection('user').insertOne(user, function (err, doc) {
+        database.collection('user').insertOne(user, function(err, doc) {
             if (err) {
                 manageError(res, err.message, "Failed to create new account.");
             } else {
@@ -250,49 +249,59 @@ app.post("/api/user", function (req, res) {
 });
 
 //send mail
-app.post("/api/user/sendmail", function (req, res) {
+app.post("/api/user/sendmail", function(req, res) {
     var user = req.body;
-    sendMail(user,info=>{
+    sendMail(user, info => {
         console.log('mail envoyer avec succes');
         res.send(info);
     });
 });
 
 async function sendMail(user, callback) {
-    var transporter =nodemailer.createTransport({
+    var transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
         secure: false,
-        auth:{
-            user: 'shajaniri@gmail.com',
-            pass: 'kile ruan#1'
+        auth: {
+            user: 'ekaly.resto@gmail.com',
+            pass: 'E-kaly#1'
         }
     });
-    let mailOptions={
+    let mailOptions = {
         from: 'shajaniri@gmail.com',
-        to:user.email,
-        subject:"Validation compte E-kaly",
-        html:'<h1>Valider compte</h1></a><br><h3>merci de nous avoir rejoint</h3>'
+        to: user.email,
+        subject: "Validation compte E-kaly",
+        html: '<h1><a href="http://localhost:4200/login/' + user.email + '">Valider compte</a></h1></a><br><h3>merci de nous avoir rejoint</h3>'
     };
 
-    let info= await transporter.sendMail(mailOptions);
+    let info = await transporter.sendMail(mailOptions);
 
     callback(info);
 }
 
+//Valider compte
+app.get("/api/user/valider/:email", function(req, res) {
+    var mail = req.params.email;
+    //var plat = req.body;
+    // console.log(id);
+    database.collection('user').findOneAndUpdate({ email: mail }, { $set: { valide: true } }), (function(error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json({ "message": "compte valider" });
+        }
+    });
+});
 
 //Check mail exist
-app.get('/api/user/:mail', (req, res) => {
-    var mail=req.params.mail;
+app.get('/api/user/:email', (req, res) => {
+    var mail = req.params.email;
     var ObjectId = require('mongodb').ObjectID;
     database.collection('user').findOne({ email: mail })
-      .then(quotes => {
-        res.status(200).json(quotes);
-      })
-      .catch(/* ... */)
-  })
-
-
+        .then(quotes => {
+            res.status(200).json(quotes);
+        });
+});
 
 
 

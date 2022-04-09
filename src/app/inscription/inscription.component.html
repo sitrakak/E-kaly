@@ -1,45 +1,54 @@
 <!DOCTYPE html>
 <html lang="en-US">
-   <head>
-     <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Inscription</title>   
-   </head>
-   <body class="size-1140">
-        <header>
-          <a href="#" class="logo">Inscription</a>
-          <div class="rs">
-            
-          </div>
-      </header>
-      <section>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inscription</title>
+</head>
+
+<body class="size-1140">
+    <header>
+        <a href="#" class="logo">Inscription</a>
+        <div class="rs">
+
+        </div>
+    </header>
+    <section>
         <div class="lien">
-          <a href="login">Connexion</a>
+            <a href="login">Connexion</a>
         </div>
         <div class="row">
             <div class="inscription">
-               <h2>Inscription</h2> 
-               <p style="color: red"></p>
-               <br>
-               <form class="customform" [formGroup]="UserForm" (ngSubmit)="onSubmit()">
-                  <label>Email</label>
-                  <input formControlName="email" id="email" type="email" />
-                  <label>Nom</label>
-                  <input formControlName="nom" id="nom" type="text" />
-                  <label>Mot de passe</label>
-                  <input formControlName="mdp" id="mdp" type="password" />
-                  <label>Confirmer mot de passe</label>
-                  <input formControlName="cmdp" id="cmdp" type="password" />
-                  <button type="submit" [disabled]="!UserForm.valid">Valider</button>
-               </form>
-             </div>
-         </div>
-      </section>
-      <img class="footer" src="">
+                <h2>Inscription</h2>
+                <p style="color: red"></p>
+                <br>
+                <div *ngIf="succes" class="alert alert-success" role="alert">
+                    Un message de confirmation a ete envoye sur votre email
+                </div>
+                <div *ngIf="erreur" class="alert alert-danger" role="alert">
+                    Ce compte existe deja
+                </div>
+                <form class="customform" [formGroup]="UserForm" (ngSubmit)="onSubmit()">
+                    <label>Email</label>
+                    <input formControlName="email" id="email" type="email" />
+                    <label>Nom</label>
+                    <input formControlName="nom" id="nom" type="text" />
+                    <label>Mot de passe</label>
+                    <input formControlName="mdp" id="mdp" type="password" />
+                    <label>Confirmer mot de passe</label>
+                    <input formControlName="cmdp" id="cmdp" type="password" />
+                    <button type="submit" [disabled]="!UserForm.valid">Valider</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <img class="footer" src="">
 
-      
-  <footer>
-    <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
-  </footer>
-   </body>
+
+    <footer>
+        <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
+    </footer>
+</body>
+
 </html>

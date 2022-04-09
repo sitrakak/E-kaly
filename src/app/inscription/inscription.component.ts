@@ -11,6 +11,9 @@ import {Router} from "@angular/router";
 })
 export class InscriptionComponent implements OnInit {
 
+  mail:IUser;
+    succes:boolean=false;
+    erreur:boolean=false;
   UserForm: FormGroup;
   email: string = '';
   nom: string = '';
@@ -33,27 +36,33 @@ export class InscriptionComponent implements OnInit {
   onSubmit() {
     const user = new User(this.UserForm.value['email'], this.UserForm.value['nom'],this.UserForm.value['valide'], this.UserForm.value['profil'], this.UserForm.value['mdp'], null);
     if (this.UserForm.value['mdp']==this.UserForm.value['cmdp']) {
-      this.UserService.create(user).then((result: IUser) => {
-        if (result === undefined) {
-          this.error = true;
-        } else {
-          this.error = false;
-          this.createdUser.emit(result);
-        }
+      this.succes=false;
+      this.erreur=false;
+       this.UserService.mail(this.UserForm.value['email']).then((result: IUser) => {
+        this.mail = result;
       });
-      this.UserService.sendMail(user).then((result: IUser) => {
-        if (result === undefined) {
-          this.error = true;
+        if(!this.mail){
+          this.UserService.create(user).then((result: IUser) => {
+            if (result === undefined) {
+              this.error = true;
+            } else {
+              this.error = false;
+              this.createdUser.emit(result);
+            }
+          });
+          this.UserService.sendMail(user).then((result: IUser) => {
+            if (result === undefined) {
+              this.error = true;
+            } else {
+              this.error = false;
+              this.createdUser.emit(result);
+            }
+          });
+          this.succes=true;
         } else {
-          this.error = false;
-          this.createdUser.emit(result);
+          this.erreur=true;
         }
-      });
-        this.router.navigate(['/login']);
-    } else {
-      
     }
-    
   }
 
   // Hide the error message.
