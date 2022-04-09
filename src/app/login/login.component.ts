@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     message="";
     user=[] as any;
     error: boolean = false;
-  
+  erreur:boolean=false;
     
   constructor(protected UserService: UserService, protected activatedRoute:ActivatedRoute,protected router:Router) { }
 
@@ -32,13 +32,20 @@ export class LoginComponent implements OnInit {
    // console.log(user);
     this.UserService.login(user).then((result: LUser) => {
       if (result === undefined) {
-        this.error = true;
+          this.erreur=false;
+          this.error = true;
+          this.erreur=true;
+
       } else {
         this.error = false;
         
         if(result["status"]=="NON"){
+          this.erreur=false;
+
           console.log("NONONON");
           this.message=result["message"];
+          this.erreur=true;
+
         }
         else if(result["status"]=="OK"){
           console.log("YES");

@@ -24,6 +24,9 @@
                 <p>Connexion</p>
                 <p style="color: red"></p>
                 <br>
+                <div *ngIf="erreur" class="alert alert-danger" role="alert">
+                    Email ou mot de passe incorrect
+                </div>
                 <form class="customform" [formGroup]="UserForm" (ngSubmit)="onSubmit()">
                     <label>E-mail</label>
                     <input formControlName="email" id="email" type="text " />
@@ -36,10 +39,11 @@
                         <h2>ou inscrivez vous!</h2>
                     </a>
                 </div>
+                <br>
             </div>
         </div>
     </section>
-    <img class="footer " src=" ">
+    <img class="footer ">
 
 
     <footer>

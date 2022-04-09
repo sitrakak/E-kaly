@@ -245,7 +245,7 @@ app.post("/api/user/login", function(req, res) {
     var mpd = sha1(user.mdp);
     console.log("email=" + user.email);
     console.log("mdp=" + user.mdp);
-    database.collection('user').findOne({ email: user.email, mdp: mpd })
+    database.collection('user').findOne({ email: user.email, mdp: mpd, valide: true })
         .then(result => {
 
             if (result != null) {

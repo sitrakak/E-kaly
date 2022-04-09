@@ -17,6 +17,7 @@ export class InscriptionComponent implements OnInit {
   UserForm: FormGroup;
   email: string = '';
   nom: string = '';
+  adresse: string = '';
   valide: boolean = false;
   profil: string = 'client';
   mdp : string = '';
@@ -34,7 +35,7 @@ export class InscriptionComponent implements OnInit {
 
   // Manage the submit action and create the new User.
   onSubmit() {
-    const user = new User(this.UserForm.value['email'], this.UserForm.value['nom'],this.UserForm.value['valide'], this.UserForm.value['profil'], this.UserForm.value['mdp'], null);
+    const user = new User(this.UserForm.value['email'], this.UserForm.value['nom'], this.UserForm.value['adresse'],this.UserForm.value['valide'], this.UserForm.value['profil'], this.UserForm.value['mdp'], null);
     if (this.UserForm.value['mdp']==this.UserForm.value['cmdp']) {
       this.succes=false;
       this.erreur=false;
@@ -75,6 +76,7 @@ export class InscriptionComponent implements OnInit {
     this.UserForm = new FormGroup({
       nom: new FormControl(this.nom, Validators.required),
       email: new FormControl(this.email, Validators.required),
+      adresse: new FormControl(this.adresse, Validators.required),
       valide: new FormControl(this.valide, Validators.required),
       profil: new FormControl(this.profil, Validators.required),
       mdp: new FormControl(this.mdp, Validators.required),

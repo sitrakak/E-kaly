@@ -63,6 +63,7 @@ nav ul li a {
     letter-spacing: 1px;
     font-weight: bolder;
     color: #013d51;
+    cursor: pointer;
 }
 
 nav ul li a:hover {

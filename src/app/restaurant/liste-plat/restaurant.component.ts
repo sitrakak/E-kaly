@@ -33,5 +33,8 @@ export class RestaurantComponent implements OnInit {
       }
     }
   }
+  deconnexion(){
+    this.user.deconnexion("token_client");
+  }
 
 }
