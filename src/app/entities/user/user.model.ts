@@ -24,3 +24,18 @@ export class User implements IUser {
     this.mdp = mdp;
   }
 }
+
+export interface LUser {
+  email: string;
+  mdp : string;
+}
+
+export class LoginUser implements LUser {
+  constructor(
+    public email: string,
+    public mdp : string,
+  ) {
+    this.email = email;
+    this.mdp = mdp;
+  }
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { IUser, User } from './user.model';
+import { IUser, LoginUser, User } from './user.model';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +24,29 @@ export class UserService {
             .toPromise()
             .then(response => response.json())
             .catch(this.error);
+    }
+
+    // Login
+    login(User: LoginUser): Promise<any> {
+        return this.http.post(`${this.UsersUrl}/login`, User)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.error);
+    }
+
+    // Logout
+    delete_token(id: string): Promise<any>  {
+        return this.http.delete(`${this.UsersUrl}/token/${id}`)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.error);
+    }
+    deconnexion(token: string) {
+        let item= JSON.parse(localStorage.getItem(token));
+        let id_user=item["id_user"];
+        this.delete_token(id_user);
+        localStorage.removeItem(token);
+        window.location.reload();
     }
 
     // Delete a User

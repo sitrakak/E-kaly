@@ -59,8 +59,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || LOCAL_DATABASE, {
     database = client.db('E-kaly');
     console.log("Database connection done.");
 
-    //const db = client.db('star-wars-quotes2')
-    //const quotesCollection = db.collection('quotes')
+    //const db = client.db('star-wars-result2')
+    //const resultCollection = db.collection('result')
 
     // Initialize the app.
     var server = app.listen(process.env.PORT || LOCAL_PORT, function() {
@@ -215,14 +215,70 @@ app.delete("/api/user/:id", function(req, res) {
     }
 });
 
+
+//creer token
+function createToken(mail) {
+    var salted = mail + Date.now();
+    var token = sha1(salted);
+    return token;
+
+}
+
+//delete token
+app.delete("/api/user/token/:id", function(req, res) {
+    if (req.params.id.length > 24 || req.params.id.length < 24) {
+        manageError(res, "Invalid product id", "ID must be a single String of 12 bytes or a string of 24 hex characters.", 400);
+    } else {
+        database.collection("token").deleteOne({ id_user: new ObjectID(req.params.id) }, function(err, result) {
+            if (err) {
+                manageError(res, err.message, "Failed to delete product.");
+            } else {
+                res.status(200).json(req.params.id);
+            }
+        });
+    }
+});
+
 //Login
 app.post("/api/user/login", function(req, res) {
     var user = req.body;
-    console.log(user.email);
-    console.log(user.mdp);
-    database.collection('user').findOne({ email: user.email, mdp: user.mdp })
-        .then(quotes => {
-            res.status(200).json(quotes);
+    var mpd = sha1(user.mdp);
+    console.log("email=" + user.email);
+    console.log("mdp=" + user.mdp);
+    database.collection('user').findOne({ email: user.email, mdp: mpd })
+        .then(result => {
+
+            if (result != null) {
+                var id_user = result["_id"];
+                var noms = result["nom"] + " " + result["prenom"];
+                var profil = result["profil"];
+                var token = createToken(user.mail);
+                var now = new Date().getTime();
+                var expire = (10 * 60) * 1000;
+
+                database.collection('token').deleteMany({ id_user: new ObjectID(id_user) }, function(err, result) {
+                    if (err) {
+                        manageError(res, err.message, "Failed to delete product.");
+                    } else {
+
+                    }
+                });
+
+                database.collection('token').insertOne({ id_user: id_user, token: token, expire: expire, date: now }, function(err, doc) {
+                    if (err) {
+                        manageError(res, err.message, "Failed to create new product.");
+                    } else {
+                        // res.status(201).json(doc.ops[0]);
+
+                        res.status(200).json({ "status": "OK", "token": token, "id_user": id_user, "nom": noms, "email": user.email, "profil": profil });
+                    }
+                });
+
+            } else {
+                res.status(200).json({ "status": "NON", "message": "Email ou Mot de passe incorrect" });
+            }
+
+
         })
 });
 
@@ -298,8 +354,8 @@ app.get('/api/user/:email', (req, res) => {
     var mail = req.params.email;
     var ObjectId = require('mongodb').ObjectID;
     database.collection('user').findOne({ email: mail })
-        .then(quotes => {
-            res.status(200).json(quotes);
+        .then(result => {
+            res.status(200).json(result);
         });
 });
 

@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Connexion</title>
-   </head>
-   <body>
-      <header>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion</title>
+</head>
+
+<body>
+    <header>
         <a href="#" class="logo">Login</a>
-          <div class="rs">
-            
-          </div>
-      </header>
-      <section>
+        <div class="rs">
+
+        </div>
+    </header>
+    <section>
         <div class="lien">
-          
+
         </div>
         <div class="row">
-          <div class="connexion">
-            <img src="">
-             <p>Connexion</p>
-             <p style="color: red"></p>
-             <br>
-             <form class="customform" action="Connexion" method="post">
-                <label>E-mail</label>
-                <input name="email" title="Your e-mail" type="text" />
-                <label>Mot de passe</label>
-                <input name="mdp" title="Your password" type="password" />
-                <button type="submit">Valider</button>
-             </form>
-             <div class="s-12 l-7"><a href="inscription"><h2>ou inscrivez vous!</h2></a></div>
-          </div>
+            <div class="connexion">
+                <img src="">
+                <p>Connexion</p>
+                <p style="color: red"></p>
+                <br>
+                <form class="customform" [formGroup]="UserForm" (ngSubmit)="onSubmit()">
+                    <label>E-mail</label>
+                    <input formControlName="email" id="email" type="text " />
+                    <label>Mot de passe</label>
+                    <input formControlName="mdp" id="mdp" type="password " />
+                    <button type="submit" [disabled]="!UserForm.valid">Valider</button>
+                </form>
+                <div class="s-12 l-7 ">
+                    <a href="inscription ">
+                        <h2>ou inscrivez vous!</h2>
+                    </a>
+                </div>
+            </div>
         </div>
-      </section>
-      <img class="footer" src="">
+    </section>
+    <img class="footer " src=" ">
 
-      
-  <footer>
-    <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
-  </footer>
-   </body>
+
+    <footer>
+        <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
+    </footer>
+</body>
+
 </html>
