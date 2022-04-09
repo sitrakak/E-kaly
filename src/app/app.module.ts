@@ -9,9 +9,10 @@ import { ProductCreateComponent } from './product/product-create/product-create.
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
-import { RestaurantComponent } from './restaurant/restaurant.component';
+import { RestaurantComponent } from './restaurant/liste-plat/restaurant.component';
 import { ClientComponent } from './client/client.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { NewPlatComponent } from './restaurant/new-plat/new-plat.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { InscriptionComponent } from './inscription/inscription.component';
     IndexComponent,
     RestaurantComponent,
     ClientComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    NewPlatComponent
   ],
   imports: [
     BrowserModule,

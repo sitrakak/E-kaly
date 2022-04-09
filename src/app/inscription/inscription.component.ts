@@ -49,7 +49,7 @@ export class InscriptionComponent implements OnInit {
           this.createdUser.emit(result);
         }
       });
-        //this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
     } else {
       
     }
@@ -69,7 +69,7 @@ export class InscriptionComponent implements OnInit {
       valide: new FormControl(this.valide, Validators.required),
       profil: new FormControl(this.profil, Validators.required),
       mdp: new FormControl(this.mdp, Validators.required),
-      cmdp: new FormControl(this.mdp, Validators.required)
+      cmdp: new FormControl(this.cmdp, Validators.required)
     });
   }
 

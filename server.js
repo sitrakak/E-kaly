@@ -130,16 +130,6 @@ app.delete("/api/products/:id", function (req, res) {
 });
 
 
-//Get all user
-app.get("/api/user", function (req, res) {
-    database.collection('user').find({}).toArray(function (error, data) {
-        if (error) {
-            manageError(res, err.message, "Failed to get contacts.");
-        } else {
-            res.status(200).json(data);
-        }
-    });
-});
 //Get all resto ekaly
 app.get("/api/user/restos-ekaly", function (req, res) {
     database.collection('user').find({profil:"resto",ekaly:"oui"}).toArray(function (error, data) {
@@ -161,12 +151,23 @@ app.get("/api/user/restos", function (req, res) {
     });
 });
 
+//nouveaux plats
+app.post("/api/plat", function (req, res) {
+    var plat = req.body;
+    database.collection('plat').insertOne(plat, function (err, doc) {
+        if (err) {
+            manageError(res, err.message, "Failed to create new plat.");
+        } else {
+            res.status(201).json(doc.ops[0]);
+        }
+    });
+});
 
-//Get all plats by resto 
-app.get("/api/plats/:id_resto", function (req, res) {
-    var id=req.params.id_resto;
+//Get all plat by resto 
+app.get("/api/plat/:idResto", function (req, res) {
+    var id=req.params.idResto;
     var ObjectId = require('mongodb').ObjectID;
-    database.collection('plats').find({ _id: ObjectId(id) }).toArray(function (error, data) {
+    database.collection('plat').find({ _id: ObjectId(id) },{ visible: true }).toArray(function (error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {
@@ -175,11 +176,45 @@ app.get("/api/plats/:id_resto", function (req, res) {
     });
 });
 
+//Plat visible sur e-kaly
+app.out("/api/plat/:id", function (req, res) {
+    var user = req.body;
+    database.collection('plat').updateOne({ _id: new ObjectID(req.params.id) }, function (err, doc) {
+        if (err) {
+            manageError(res, err.message, "Failed to create new account.");
+        } else {
+            res.status(201).json(doc.ops[0]);
+        }
+    });
+});
 
 
 
+//Get all user
+app.get("/api/user", function (req, res) {
+    database.collection('user').find({}).toArray(function (error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json(data);
+        }
+    });
+});
 
-
+//Delete user
+app.delete("/api/user/:id", function (req, res) {
+    if (req.params.id.length > 24 || req.params.id.length < 24) {
+        manageError(res, "Invalid product id", "ID must be a single String of 12 bytes or a string of 24 hex characters.", 400);
+    } else {
+        database.collection('user').deleteOne({ _id: new ObjectID(req.params.id) }, function (err, result) {
+            if (err) {
+                manageError(res, err.message, "Failed to delete product.");
+            } else {
+                res.status(200).json(req.params.id);
+            }
+        });
+    }
+});
 
 //Login
 app.post("/api/user/login", function (req, res) {

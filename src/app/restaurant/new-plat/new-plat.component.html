@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+     <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Nouveau plat</title>   
+   </head>
+    <body class="size-1140">
+    <header>
+		<a href="restaurant" class="logo">Restaurant</a>
+		<div class="menu-toggle"></div>
+		<nav>
+			<ul>
+			  <li><a class="active" href="restaurant">Plats</a></li>
+			  <li class="mid"><a href="plat/nouveau">Nouveaux plats</a></li>
+			  <li class="mid" ><a href="#contactez_nous">Commande</a></li>
+			  <li class="mid" ><a href="Connexion">Benefices</a></li>
+			  <li class="mid" ><a href="Choix">Deconnexion</a></li>
+			</ul>
+		</nav>
+		<div class="clearfix"></div>
+	</header>
+      <section>
+        <div class="lien">
+          
+        </div>
+        <div class="row">
+            <div class="form">
+               <p style="color: red"></p>
+               <br>
+               <form class="customform" [formGroup]="PlatForm" (ngSubmit)="onSubmit()">
+                  <label>nom</label>
+                  <input formControlName="nom" id="nom" type="text" />
+                  <label>prix revient</label>
+                  <input formControlName="prixRevient" id="prixRevient" type="text" />
+                  <label>prix vente</label>
+                  <input formControlName="prixVente" id="prixVente" type="text" />
+                  <select formControlName="visible">
+                    <option value="true">Visible</option>
+                    <option value="false">Non visible</option>
+                  </select>
+                  <select formControlName="idResto">
+                    <option value="">resto</option>
+                  </select>
+                  <button type="submit" [disabled]="!PlatForm.valid">Valider</button>
+               </form>
+             </div>
+         </div>
+      </section>
+      <img class="footer" src="">
+
+      
+  <footer>
+    <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
+  </footer>
+   </body>
+</html>
