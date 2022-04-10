@@ -19,12 +19,12 @@ export class RestaurantComponent implements OnInit {
       $('.menu-toggle').toggleClass('active');
       $('nav').toggleClass('active');
     });
-    let item= JSON.parse(localStorage.getItem("token_client"));
+    let item= JSON.parse(localStorage.getItem("token_resto"));
     if (!item) {
       this.router.navigate(['/login']);
     } else {
-      if (item["profil"]!="client") {
-        this.user.deconnexion("token_client");
+      if (item["profil"]!="resto") {
+        this.user.deconnexion("token_resto");
         this.router.navigate(['/login']);
       } else {
         this.id_user=item["id_User"];
@@ -34,7 +34,7 @@ export class RestaurantComponent implements OnInit {
     }
   }
   deconnexion(){
-    this.user.deconnexion("token_client");
+    this.user.deconnexion("token_resto");
   }
 
 }

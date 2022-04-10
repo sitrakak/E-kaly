@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
           {
             localStorage.setItem("token_client",JSON.stringify(result));
            let item = JSON.parse(localStorage.getItem("token_client"));
-            this.router.navigateByUrl("/restaurant");
+            this.router.navigateByUrl("/client");
           }
           if(result["profil"]=="resto")
           {
@@ -68,13 +68,13 @@ export class LoginComponent implements OnInit {
           {
             localStorage.setItem("token_admin",JSON.stringify(result));
             let item = JSON.parse(localStorage.getItem("token_admin"));
-            this.router.navigateByUrl("/e-kaly-admin");
+            this.router.navigateByUrl("/admin");
           }
 
           if(result["profil"]=="livreur")
           {
             localStorage.setItem("token_livreur",JSON.stringify(result));
-           // let item = JSON.parse(localStorage.getItem("token_client"));
+           let item = JSON.parse(localStorage.getItem("token_livreur"));
             this.router.navigateByUrl("/livreur");
           }
          

@@ -36,15 +36,24 @@
 
 
 
+    <table *ngIf="plats.length > 0" class="table">
+        <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let plat of plats">
+                <td>{{ plat.image }}</td>
+                <td>{{ plat.nom }}</td>
+                <td>{{ plat.prixVente }}</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <div class="half clearfix">
-        <div class="div" *ngFor="let rest of resto">
-            <div class="plat">
-                <a href="commande/{{ rest._id }}"><img class="header " alt="header " src="assets/pictogrammes/elements/resto.webp "></a>
-            </div>
-            <h1>{{ rest.nom }}</h1>
-        </div>
-    </div>
+
     <footer>
         <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
     </footer>

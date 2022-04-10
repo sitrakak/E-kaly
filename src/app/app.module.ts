@@ -8,11 +8,13 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { ProductCreateComponent } from './product/product-create/product-create.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { IndexComponent } from './index/index.component';
 import { RestaurantComponent } from './restaurant/liste-plat/restaurant.component';
 import { ClientComponent } from './client/client.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { NewPlatComponent } from './restaurant/new-plat/new-plat.component';
+import { AdminComponent } from './admin/admin/admin.component';
+import { LivreurComponent } from './livreur/livreur/livreur.component';
+import { CommandeComponent } from './client/commande/commande.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { NewPlatComponent } from './restaurant/new-plat/new-plat.component';
     ProductListComponent,
     ProductCreateComponent,
     LoginComponent,
-    IndexComponent,
     RestaurantComponent,
     ClientComponent,
     InscriptionComponent,
-    NewPlatComponent
+    NewPlatComponent,
+    AdminComponent,
+    LivreurComponent,
+    CommandeComponent
   ],
   imports: [
     BrowserModule,

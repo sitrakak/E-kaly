@@ -18,6 +18,14 @@ export class UserService {
             .catch(this.error);
     }
 
+    //get resto
+    resto(): Promise<Array<IUser>> {
+        return this.http.get(`${this.UsersUrl}/resto`)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.error);
+    }
+
     // Create User
     create(User: User): Promise<IUser> {
         return this.http.post(this.UsersUrl, User)

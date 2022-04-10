@@ -140,7 +140,7 @@ app.get("/api/user/restos-ekaly", function(req, res) {
     });
 });
 //Get all resto 
-app.get("/api/user/restos", function(req, res) {
+app.get("/api/user/resto", function(req, res) {
     database.collection('user').find({ profil: "resto" }).toArray(function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
@@ -166,7 +166,7 @@ app.post("/api/plat", function(req, res) {
 app.get("/api/plat/:idResto", function(req, res) {
     var id = req.params.idResto;
     var ObjectId = require('mongodb').ObjectID;
-    database.collection('plat').find({ _id: ObjectId(id) }, { visible: true }).toArray(function(error, data) {
+    database.collection('plat').find({ idResto: id }, { visible: true }).toArray(function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {
@@ -175,17 +175,6 @@ app.get("/api/plat/:idResto", function(req, res) {
     });
 });
 
-//Plat visible sur e-kaly
-app.get("/api/plat/:id", function(req, res) {
-    var user = req.body;
-    database.collection('plat').updateOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
-        if (err) {
-            manageError(res, err.message, "Failed to create new account.");
-        } else {
-            res.status(201).json(doc.ops[0]);
-        }
-    });
-});
 
 
 
