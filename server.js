@@ -69,6 +69,17 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || LOCAL_DATABASE, {
     });
 });
 
+
+app.get('', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/login', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/login/:email', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/plat/nouveau', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/restaurant', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/inscription', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/client', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/commande/:id', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+
 /*  "/api/status"
  *   GET: Get server status
  *   PS: it's just an example, not mandatory
