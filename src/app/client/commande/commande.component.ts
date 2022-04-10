@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IPlat } from 'src/app/entities/plat/plat.model';
+import { Commande, ICommande } from 'src/app/entities/commande/commande.model';
+import { CommandeService } from 'src/app/entities/commande/commande.service';
+import { IPlat,Plat } from 'src/app/entities/plat/plat.model';
 import { PlatService } from 'src/app/entities/plat/plat.service';
 import { UserService } from 'src/app/entities/user/user.service';
 
@@ -15,7 +18,12 @@ export class CommandeComponent implements OnInit {
   id_user:string='';
   email:string='';
   nom:string='';
-  constructor(private plat:PlatService,private activatedRoute:ActivatedRoute, private user:UserService, private router:Router) { }
+  error: boolean = false;
+  quantite = new FormControl(Validators.required);
+
+  @Output() createdCommande = new EventEmitter<ICommande>();
+  
+  constructor(private platserv:PlatService,private activatedRoute:ActivatedRoute, private user:UserService, private router:Router,private commandeserv:CommandeService) { }
 
   ngOnInit(): void {
     $('.menu-toggle').click(function(){
@@ -35,9 +43,23 @@ export class CommandeComponent implements OnInit {
         this.nom=item["nom"];
       }
     }
+    this.loadAll();
+  }
+  onsubmit(plat:Plat){
+    const commande = new Commande(this.id_user, plat._id, this.quantite.value,plat.prixVente, null);
+    this.commandeserv.Commander(commande).then((result: ICommande) => {
+      if (result === undefined) {
+        this.error = true;
+      } else {
+        this.error = false;
+        this.createdCommande.emit(result);
+      }
+    });
+  }
+  private loadAll() {
     this.idResto=this.activatedRoute.snapshot.params["id"];
-    this.plat
-      .getPlatResto(this.idResto)
+    this.platserv
+      .plat(this.idResto)
       .then((result: Array<IPlat>) => {
         this.plats = result;
       });

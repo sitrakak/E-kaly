@@ -187,7 +187,18 @@ app.get("/api/plat/:idResto", function(req, res) {
     });
 });
 
-
+//Commander
+app.post("/api/commande", function(req, res) {
+    var commande = req.body;
+    commande.date=Date.now();
+    database.collection('commande').insertOne(commande, function(err, doc) {
+        if (err) {
+            manageError(res, err.message, "Failed to create new account.");
+        } else {
+            res.status(201).json(doc.ops[0]);
+        }
+    });
+});
 
 
 //Get all user
@@ -244,8 +255,6 @@ app.delete("/api/user/token/:id", function(req, res) {
 app.post("/api/user/login", function(req, res) {
     var user = req.body;
     var mpd = sha1(user.mdp);
-    console.log("email=" + user.email);
-    console.log("mdp=" + user.mdp);
     database.collection('user').findOne({ email: user.email, mdp: mpd, valide: true })
         .then(result => {
 

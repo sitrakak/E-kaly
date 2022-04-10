@@ -9,7 +9,7 @@ import { ProductCreateComponent } from './product/product-create/product-create.
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RestaurantComponent } from './restaurant/liste-plat/restaurant.component';
-import { ClientComponent } from './client/client.component';
+import { ClientComponent } from './client/client/client.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { NewPlatComponent } from './restaurant/new-plat/new-plat.component';
 import { AdminComponent } from './admin/admin/admin.component';

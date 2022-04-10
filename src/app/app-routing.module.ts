@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin/admin.component';
-import { ClientComponent } from './client/client.component';
+import { ClientComponent } from './client/client/client.component';
 import { CommandeComponent } from './client/commande/commande.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { LoginComponent } from './login/login.component';

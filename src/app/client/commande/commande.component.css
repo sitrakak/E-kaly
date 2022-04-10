@@ -1,5 +1,4 @@
 * {
-    font-family: 'cocogoose', sans-serif;
     font-weight: 200;
     font-size: 14px;
     margin: 0;
@@ -85,92 +84,41 @@ header .rs .img1 {
     margin-right: 20px;
 }
 
-.titre {
-    width: 100%;
-    height: 550px;
-    margin: 92px 0px;
-    background-color: blue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.content-table{
+	border-collapse: separate;
+	border-spacing: 10px;
+	margin-left: auto;
+	margin-right: auto;
+    padding-top: 150px;
+	min-width: 400px;
 }
-
-.titre .header {
-    width: 100%;
-    height: 550px;
-    object-fit: cover;
-    object-position: center 22%;
-    opacity: 0.6;
+.content-table input{
+    margin-left: auto;
+    margin-right: auto;
+	width: 40px;
 }
-
-.titre1 {
-    position: absolute;
-    top: 190px;
-    color: white;
-    font-weight: normal;
-    font-family: Blackadder ITC;
-    font-size: 70px;
+.content-table a{
+    cursor: pointer;
 }
-
-.titre .we_care {
-    position: absolute;
-    top: 290px;
-    color: white;
-    font-weight: normal;
-    font-size: 30px;
+.content-table thead th{
+	background-color: #00CED1;
+	margin: 100px;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
 }
-
-.titre .sous-titre {
-    width: 400px;
-    text-align: center;
-    background-color: white;
-    border-radius: 25px;
+.content-table td,th{
+	padding: 2px 40px;
+	height: 60px;
 }
-
-.titre .sous-titre p {
-    margin: 10px;
-}
-
-.titre .sous-titre p {
-    margin: 10px;
-}
-
-.half {
-    margin-top: 100px;
-    width: 100%;
-}
-
-.div {
-    width: 25%;
-    margin: 4%;
-    margin-top: 0%;
-    height: 300px;
-    float: left;
-    text-align: center;
-}
-
-.div .plat {
-    width: 100%;
-    height: 250px;
-    background-color: white;
-}
-
-.div .plat img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-
-.div h1 {
-    font-size: 50px;
-    margin: 1.5%;
-    color: white;
+.content-table tbody tr{
+	background-color: #f3f3f3;
 }
 
 footer {
     text-align: center;
     background-color: white;
-    height: 70px;
+    margin-top: 340px;
 }
 
 footer p {

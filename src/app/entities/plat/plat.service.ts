@@ -11,7 +11,7 @@ export class PlatService {
   constructor(private http: Http) { }
 
   // Get Plats by idResto
-  getPlatResto(id:string): Promise<Array<IPlat>> {
+  plat(id:string): Promise<Array<IPlat>> {
       return this.http.get(`${this.PlatsUrl}/${id}`)
           .toPromise()
           .then(response => response.json())

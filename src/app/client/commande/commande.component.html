@@ -28,30 +28,28 @@
 
 
     <!-- BODY -->
-    <div class="titre">
-        <img class="header" alt="header" src="assets/pictogrammes/elements/resto.webp">
-        <h1 class="titre1">E-kaly</h1>
-        <h1 class="we_care">Satisfait ou rembourser</h1>
-    </div>
-
-
-
-    <table *ngIf="plats.length > 0" class="table">
+    <table class="content-table">
         <thead>
-            <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Prix</th>
-            </tr>
+          <tr>
+              <th>Image</th>
+              <th>Nom</th>
+              <th>Prix</th>
+              <th>Quantite</th>
+          </tr>
         </thead>
         <tbody>
             <tr *ngFor="let plat of plats">
                 <td>{{ plat.image }}</td>
                 <td>{{ plat.nom }}</td>
                 <td>{{ plat.prixVente }}</td>
+                <td><input id="quantite" type="number" [formControl]="quantite"/></td>
+                <td><a (click)="onsubmit(plat)">Commander</a></td>
             </tr>
         </tbody>
-    </table>
+        </table>
+    
+    <img class="footer">
+    
 
 
     <footer>
