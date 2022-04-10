@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Agence de communication Minucia Madagascar</title>
+    <title>Commande</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="HTML, CSS, JavaScript">
@@ -18,7 +18,7 @@
         <nav>
             <ul>
                 <li><a class="active" href="client">Commander</a></li>
-                <li class="mid"><a href="">Commande en cours</a></li>
+                <li class="mid"><a href="commande-en-cours">Commande en cours</a></li>
                 <li class="mid"><a (click)="deconnexion()">Deconnexion</a></li>
             </ul>
         </nav>
@@ -42,7 +42,7 @@
                 <td>{{ plat.image }}</td>
                 <td>{{ plat.nom }}</td>
                 <td>{{ plat.prixVente }}</td>
-                <td><input id="quantite" type="number" [formControl]="quantite"/></td>
+                <td><input id="quantite" type="number" [formControl]="quantite" placeholder=0/></td>
                 <td><a (click)="onsubmit(plat)">Commander</a></td>
             </tr>
         </tbody>

@@ -3,7 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin/admin.component';
 import { ClientComponent } from './client/client/client.component';
 import { CommandeComponent } from './client/commande/commande.component';
+import { LivrerComponent } from './client/livrer/livrer.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { LivreurComponent } from './livreur/livreur.component';
 import { LoginComponent } from './login/login.component';
 import { RestaurantComponent } from './restaurant/liste-plat/restaurant.component';
 import { NewPlatComponent } from './restaurant/new-plat/new-plat.component';
@@ -17,8 +19,10 @@ const routes: Routes = [
   {path:'client',component:ClientComponent},
   {path:'commande/:id',component:CommandeComponent},
   {path:'admin',component:AdminComponent},
+  {path:'livreur',component:LivreurComponent},
   {path:'plat/nouveau',component:NewPlatComponent},
-  {path:'inscription',component:InscriptionComponent}
+  {path:'inscription',component:InscriptionComponent},
+  {path:'commande-en-cours',component:LivrerComponent}
 ];
 
 @NgModule({

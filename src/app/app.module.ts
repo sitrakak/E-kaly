@@ -13,8 +13,9 @@ import { ClientComponent } from './client/client/client.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { NewPlatComponent } from './restaurant/new-plat/new-plat.component';
 import { AdminComponent } from './admin/admin/admin.component';
-import { LivreurComponent } from './livreur/livreur/livreur.component';
+import { LivreurComponent } from './livreur/livreur.component';
 import { CommandeComponent } from './client/commande/commande.component';
+import { LivrerComponent } from './client/livrer/livrer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CommandeComponent } from './client/commande/commande.component';
     NewPlatComponent,
     AdminComponent,
     LivreurComponent,
-    CommandeComponent
+    CommandeComponent,
+    LivrerComponent
   ],
   imports: [
     BrowserModule,

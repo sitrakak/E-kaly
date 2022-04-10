@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Liste Restaurant</title>
+    <title>Livreur</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="HTML, CSS, JavaScript">
@@ -13,7 +13,7 @@
 <body>
     <!-- HEADER -->
     <header>
-        <a href="client" class="logo">Client</a>
+        <a href="restaurant" class="logo">Client</a>
         <div class="menu-toggle"></div>
         <nav>
             <ul>
@@ -28,23 +28,28 @@
 
 
     <!-- BODY -->
-    <div class="titre">
-        <img class="header" alt="header" src="assets/pictogrammes/elements/resto.webp">
-        <h1 class="titre1">E-kaly</h1>
-        <h1 class="we_care">Satisfait ou rembourser</h1>
-    </div>
+    <table class="content-table">
+        <thead>
+          <tr>
+            <th>Plat</th>
+            <th>quantite</th>
+            <th>Prix</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let commande of commandes">
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.quantite }}</td>
+                <td>{{ commande.prixUnitaire*commande.quantite }}</td>
+                <td><a (click)="onsubmit(commande)">Livrer</a></td>
+            </tr>
+        </tbody>
+        </table>
+    
+    <img class="footer">
+    
 
 
-
-
-    <div class="half clearfix">
-        <div class="div" *ngFor="let rest of resto">
-            <div class="plat">
-                <a href="commande/{{ rest._id }}"><img class="header " alt="header " src="assets/pictogrammes/elements/resto.webp "></a>
-            </div>
-            <h1>{{ rest.nom }}</h1>
-        </div>
-    </div>
     <footer>
         <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
     </footer>

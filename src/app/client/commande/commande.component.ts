@@ -46,15 +46,19 @@ export class CommandeComponent implements OnInit {
     this.loadAll();
   }
   onsubmit(plat:Plat){
-    const commande = new Commande(this.id_user, plat._id, this.quantite.value,plat.prixVente, null);
-    this.commandeserv.Commander(commande).then((result: ICommande) => {
-      if (result === undefined) {
-        this.error = true;
-      } else {
-        this.error = false;
-        this.createdCommande.emit(result);
-      }
-    });
+    const commande = new Commande(this.id_user, plat._id, plat.nom , this.quantite.value,plat.prixVente, false, null, null);
+    if(this.quantite.value>0){
+      if(confirm("Voulez vous vraiment commander "+this.quantite.value+" "+plat.nom+"?")==true){
+        this.commandeserv.Commander(commande).then((result: ICommande) => {
+          if (result === undefined) {
+            this.error = true;
+          } else {
+            this.error = false;
+            this.createdCommande.emit(result);
+          }
+        });
+      }else{}
+    }
   }
   private loadAll() {
     this.idResto=this.activatedRoute.snapshot.params["id"];

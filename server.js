@@ -20,6 +20,7 @@ var cors = require('cors');
 var nodemailer = require('nodemailer');
 const { async } = require("rxjs/internal/scheduler/async");
 const { getMaxListeners } = require("process");
+const { createFalse } = require("typescript");
 
 // The products collection
 var PRODUCTS_COLLECTION = "products";
@@ -80,6 +81,7 @@ app.get('/inscription', (req, res) => res.sendFile(path.join(__dirname, '/dist/n
 app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/client', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/commande/:id', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/commande-en-cours', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 
 /*  "/api/status"
  *   GET: Get server status
@@ -196,6 +198,44 @@ app.post("/api/commande", function(req, res) {
             manageError(res, err.message, "Failed to create new account.");
         } else {
             res.status(201).json(doc.ops[0]);
+        }
+    });
+});
+
+//Get commande en cours
+app.get("/api/commande/:idClient", function(req, res) {
+    var id = req.params.idClient;
+    var ObjectId = require('mongodb').ObjectID;
+    database.collection('commande').find({ idClient: id }, { livrer: false }).toArray(function(error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json(data);
+        }
+    });
+});
+
+//Get commande a livrer
+app.get("/api/commande/livrer/:livreur", function(req, res) {
+    var id = req.params.livreur;
+    var ObjectId = require('mongodb').ObjectID;
+    database.collection('commande').find({ livreur: id }, { livrer: false }).toArray(function(error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json(data);
+        }
+    });
+});
+
+//Livrer
+app.get("/api/livrer/:id", function(req, res) {
+    var id = req.params.id;
+    database.collection('commande').findOneAndUpdate({ _id: id }, { $set: { livrer : true } }), (function(error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json({ "message": "compte valider" });
         }
     });
 });
