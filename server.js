@@ -82,6 +82,8 @@ app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-ex
 app.get('/client', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/commande/:id', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/commande-en-cours', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/restaurant/commande', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/livreur', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 
 /*  "/api/status"
  *   GET: Get server status
@@ -142,17 +144,6 @@ app.delete("/api/products/:id", function(req, res) {
     }
 });
 
-
-//Get all resto ekaly
-app.get("/api/user/restos-ekaly", function(req, res) {
-    database.collection('user').find({ profil: "resto", ekaly: "oui" }).toArray(function(error, data) {
-        if (error) {
-            manageError(res, err.message, "Failed to get contacts.");
-        } else {
-            res.status(200).json(data);
-        }
-    });
-});
 //Get all resto 
 app.get("/api/user/resto", function(req, res) {
     database.collection('user').find({ profil: "resto" }).toArray(function(error, data) {
@@ -163,6 +154,29 @@ app.get("/api/user/resto", function(req, res) {
         }
     });
 });
+
+//Get all livreur 
+app.get("/api/user/livreur", function(req, res) {
+    database.collection('user').find({ profil: "livreur" }).toArray(function(error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json(data);
+        }
+    });
+});
+
+//Get all commande 
+app.get("/api/commande/all", function(req, res) {
+    database.collection('commande').find({ livrer: false }).toArray(function(error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json(data);
+        }
+    });
+});
+
 
 //nouveaux plats
 app.post("/api/plat", function(req, res) {
@@ -198,6 +212,18 @@ app.post("/api/commande", function(req, res) {
             manageError(res, err.message, "Failed to create new account.");
         } else {
             res.status(201).json(doc.ops[0]);
+        }
+    });
+});
+
+//Assigner livreur
+app.get("/api/commande/assigner/:id/:livreur",function(req, res) {
+    var ObjectId = require('mongodb').ObjectID;
+    database.collection('commande').findOneAndUpdate({ _id: new ObjectID(req.params.id) }, { $set: { livreur : req.params.livreur } }), (function(error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json({ "message": "compte valider" });
         }
     });
 });

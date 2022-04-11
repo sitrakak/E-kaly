@@ -1,1 +1,74 @@
-<p>admin works!</p>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Commande</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Hajanirivo Sitraka">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <a href="restaurant" class="logo">Admin</a>
+        <div class="menu-toggle"></div>
+        <nav>
+            <ul>
+                <li><a class="focus" href="client">Commander</a></li>
+                <li class="mid"><a href="commande-en-cours">Commande en cours</a></li>
+                <li class="mid"><a (click)="deconnexion()">Deconnexion</a></li>
+            </ul>
+        </nav>
+        <div class="clearfix"></div>
+    </header>
+
+
+
+    <!-- BODY -->
+    <table class="content-table">
+        <thead>
+            <tr>
+              <th>Plat</th>
+              <th>quantite</th>
+              <th>Prix</th>
+              <th>Client</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let commande of commandes">
+                  <td>{{ commande.nom }}</td>
+                  <td>{{ commande.quantite }}</td>
+                  <td>{{ commande.prixUnitaire*commande.quantite }}</td>
+                  <td>{{ commande.Client }}</td>
+                <td>
+                    <select [formControl]="livreur">
+                        <option *ngFor="let livreur of livreurs" [value]="livreur._id">{{ livreur.nom }}</option>
+                      </select>
+                </td>
+                <td><a (click)="onsubmit(commande)">Assigner</a></td>
+            </tr>
+        </tbody>
+        </table>
+    
+    <img class="footer">
+    
+
+
+    <footer>
+        <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
+    </footer>
+
+    <script type="text/javascript ">
+        $(document).ready(function($) {
+            $('.menu-toggle').click(function() {
+                $('.menu-toggle').toggleClass('active');
+                $('nav').toggleClass('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

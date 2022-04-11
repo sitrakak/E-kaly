@@ -9,6 +9,14 @@ export class CommandeService {
   private CommandesUrl = '/api/commande';
 
   constructor(private http: Http) { }
+  //get resto
+  commande(): Promise<Array<ICommande>> {
+    return this.http.get(`${this.CommandesUrl}/all`)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.error);
+  }
+
   //Commander
   Commander(commande: Commande): Promise<ICommande> {
     return this.http.post(this.CommandesUrl, commande)
@@ -41,6 +49,14 @@ export class CommandeService {
   // Livrer
   livrer(id:string): Promise<Array<ICommande>> {
     return this.http.get(`api/livrer/${id}`)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.error);
+  }
+
+  // Assigner livreur
+  assigner(id:string, livreur:string): Promise<Array<ICommande>> {
+    return this.http.get(`${this.CommandesUrl}/assigner/${id}/${livreur}`)
         .toPromise()
         .then(response => response.json())
         .catch(this.error);
