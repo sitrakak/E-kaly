@@ -31,7 +31,6 @@
     <table class="content-table">
         <thead>
           <tr>
-              <th>Image</th>
               <th>Nom</th>
               <th>Prix</th>
               <th>Quantite</th>
@@ -39,7 +38,6 @@
         </thead>
         <tbody>
             <tr *ngFor="let plat of plats">
-                <td>{{ plat.image }}</td>
                 <td>{{ plat.nom }}</td>
                 <td>{{ plat.prixVente }}</td>
                 <td><input id="quantite" type="number" [formControl]="quantite" placeholder=0/></td>

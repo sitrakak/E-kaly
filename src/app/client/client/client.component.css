@@ -37,7 +37,7 @@ header {
 }
 
 nav ul {
-    margin-right: 380px;
+    margin-left: -380px;
     margin-top: 10px;
     display: flex;
     justify-content: center;
@@ -162,7 +162,7 @@ header .rs .img1 {
 }
 
 .div h1 {
-    font-size: 50px;
+    font-size: 40px;
     margin: 1.5%;
     color: white;
 }
@@ -393,5 +393,51 @@ footer p {
     }
     .titre .sous-titre p {
         margin: 10px;
+    }
+}
+
+
+@media (max-width: 992px) {
+	.div .plat{
+		height: 200px;
+	}
+    .div .plat img{
+		height: 200px;
+	}
+    .div h1 {
+        font-size: 25px;
+    }
+}
+@media (max-width: 768px) {
+	.div .plat{
+		height: 160px;
+	}
+    .div .plat img{
+		height: 160px;
+	}
+    .div h1 {
+        font-size: 18px;
+    }
+}
+@media (max-width: 576px) {
+	.div .plat{
+		height: 110px;
+	}
+    .div .plat img{
+		height: 110px;
+	}
+    .div h1 {
+        font-size: 16px;
+    }
+}
+@media (max-width: 400px) {
+	.div .plat{
+		height: 80px;
+	}
+    .div .plat img{
+		height: 80px;
+	}
+    .div h1 {
+        font-size: 14px;
     }
 }
