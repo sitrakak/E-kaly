@@ -463,7 +463,7 @@ async function sendMail(user, callback) {
         from: 'shajaniri@gmail.com',
         to: user.email,
         subject: "Validation compte E-kaly",
-        html: '<h1><a href="https://m1p9mean-sitraka.herokuapp.com/' + user.email + '">Valider compte</a></h1></a><br><h3>merci de nous avoir rejoint</h3>'
+        html: '<h1><a href="https://m1p9mean-sitraka.herokuapp.com/login/' + user.email + '">Valider compte</a></h1></a><br><h3>merci de nous avoir rejoint</h3>'
     };
 
     let info = await transporter.sendMail(mailOptions);
