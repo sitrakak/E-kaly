@@ -180,7 +180,7 @@ app.post("/api/plat", function(req, res) {
 app.get("/api/plat/:idResto", function(req, res) {
     var id = req.params.idResto;
     var ObjectId = require('mongodb').ObjectID;
-    database.collection('plat').find({ idResto: id }, { visible: true }).toArray(function(error, data) {
+    database.collection('plat').find({ idResto: id ,  visible: true }).toArray(function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {
@@ -202,11 +202,24 @@ app.post("/api/commande", function(req, res) {
     });
 });
 
-//Get commande en cours
+//Get commande en cours client
 app.get("/api/commande/:idClient", function(req, res) {
     var id = req.params.idClient;
     var ObjectId = require('mongodb').ObjectID;
-    database.collection('commande').find({ idClient: id }, { livrer: false }).toArray(function(error, data) {
+    database.collection('commande').find({ idClient: id ,  livrer: false }).toArray(function(error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json(data);
+        }
+    });
+});
+
+//Get commande en cours restaurant
+app.get("/api/restaurant/commande/:idResto", function(req, res) {
+    var id = req.params.idResto;
+    var ObjectId = require('mongodb').ObjectID;
+    database.collection('commande').find({ idResto: id ,  livrer: false }).toArray(function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {
@@ -219,7 +232,7 @@ app.get("/api/commande/:idClient", function(req, res) {
 app.get("/api/commande/livrer/:livreur", function(req, res) {
     var id = req.params.livreur;
     var ObjectId = require('mongodb').ObjectID;
-    database.collection('commande').find({ livreur: id }, { livrer: false }).toArray(function(error, data) {
+    database.collection('commande').find({ livreur: id ,  livrer: false }).toArray(function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {
@@ -230,8 +243,8 @@ app.get("/api/commande/livrer/:livreur", function(req, res) {
 
 //Livrer
 app.get("/api/livrer/:id", function(req, res) {
-    var id = req.params.id;
-    database.collection('commande').findOneAndUpdate({ _id: id }, { $set: { livrer : true } }), (function(error, data) {
+    var ObjectId = require('mongodb').ObjectID;
+    database.collection('commande').findOneAndUpdate({ _id: new ObjectID(req.params.id) }, { $set: { livrer : true } }), (function(error, data) {
         if (error) {
             manageError(res, err.message, "Failed to get contacts.");
         } else {

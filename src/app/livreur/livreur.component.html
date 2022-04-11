@@ -13,12 +13,11 @@
 <body>
     <!-- HEADER -->
     <header>
-        <a href="restaurant" class="logo">Client</a>
+        <a href="livreur" class="logo">Livreur</a>
         <div class="menu-toggle"></div>
         <nav>
             <ul>
-                <li><a class="active" href="client">Commander</a></li>
-                <li class="mid"><a href="commande-en-cours">Commande en cours</a></li>
+                <li><a class="focus" href="livreur">Livraison</a></li>
                 <li class="mid"><a (click)="deconnexion()">Deconnexion</a></li>
             </ul>
         </nav>
@@ -54,14 +53,6 @@
         <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
     </footer>
 
-    <script type="text/javascript ">
-        $(document).ready(function($) {
-            $('.menu-toggle').click(function() {
-                $('.menu-toggle').toggleClass('active');
-                $('nav').toggleClass('active');
-            });
-        });
-    </script>
 </body>
 
 </html>

@@ -46,7 +46,7 @@ export class CommandeComponent implements OnInit {
     this.loadAll();
   }
   onsubmit(plat:Plat){
-    const commande = new Commande(this.id_user, plat._id, plat.nom , this.quantite.value,plat.prixVente, false, null, null);
+    const commande = new Commande(this.id_user,this.email, plat._id, plat.idResto, plat.nom , this.quantite.value,plat.prixVente, false, null, null);
     if(this.quantite.value>0){
       if(confirm("Voulez vous vraiment commander "+this.quantite.value+" "+plat.nom+"?")==true){
         this.commandeserv.Commander(commande).then((result: ICommande) => {

@@ -23,6 +23,13 @@ export class CommandeService {
         .then(response => response.json())
         .catch(this.error);
   }
+  // Get Commandes by Resto
+  CommandeResto(id:string): Promise<Array<ICommande>> {
+    return this.http.get(`api/restaurant/commande/${id}`)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.error);
+  }
   // Get Commandes a livrer
   livraison(livreur:string): Promise<Array<ICommande>> {
     return this.http.get(`${this.CommandesUrl}/livrer/${livreur}`)

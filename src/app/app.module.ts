@@ -15,6 +15,7 @@ import { NewPlatComponent } from './restaurant/new-plat/new-plat.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { LivreurComponent } from './livreur/livreur.component';
 import { CommandeComponent } from './client/commande/commande.component';
+import { CommandeRestaurantComponent } from './restaurant/commande/commande.component';
 import { LivrerComponent } from './client/livrer/livrer.component';
 
 @NgModule({
@@ -30,6 +31,7 @@ import { LivrerComponent } from './client/livrer/livrer.component';
     AdminComponent,
     LivreurComponent,
     CommandeComponent,
+    CommandeRestaurantComponent,
     LivrerComponent
   ],
   imports: [

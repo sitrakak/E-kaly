@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nouveau plat</title>
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Hajanirivo Sitraka">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
 <body class="size-1140">
@@ -13,9 +16,9 @@
         <div class="menu-toggle"></div>
         <nav>
             <ul>
-                <li><a class="active" href="restaurant">Plats</a></li>
-                <li class="mid"><a href="plat/nouveau">Nouveaux plats</a></li>
-                <li class="mid"><a href="#contactez_nous">Commande</a></li>
+                <li><a href="restaurant">Plats</a></li>
+                <li class="mid"><a class="focus" href="plat/nouveau">Nouveaux-plats</a></li>
+                <li class="mid"><a href="restaurant/commande">Commande</a></li>
                 <li class="mid"><a href="Connexion">Benefices</a></li>
                 <li class="mid"><a (click)="deconnexion()">Deconnexion</a></li>
             </ul>
@@ -54,5 +57,16 @@
         <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
     </footer>
 </body>
-
+<script type="text/javascript">
+    /*window.addEventListener("scroll",function(){  
+                                                                                        var header=document.querySelector("header");
+                                                                                        header.classList.toggle("stick", window.scrollY > 0);
+                                                                                    });*/
+    $(document).ready(function($) {
+        $('.menu-toggle').click(function() {
+            $('.menu-toggle').toggleClass('active');
+            $('nav').toggleClass('active');
+        });
+    });
+</script>
 </html>

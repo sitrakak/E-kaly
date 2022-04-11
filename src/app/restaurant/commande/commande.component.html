@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Commande</title>
+    <title>Livreur</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="HTML, CSS, JavaScript">
@@ -13,12 +13,14 @@
 <body>
     <!-- HEADER -->
     <header>
-        <a href="restaurant" class="logo">Client</a>
+        <a href="livreur" class="logo">Restaurant</a>
         <div class="menu-toggle"></div>
         <nav>
             <ul>
-                <li><a class="focus" href="client">Commander</a></li>
-                <li class="mid"><a href="commande-en-cours">Commande en cours</a></li>
+                <li><a href="restaurant">Plats</a></li>
+                <li class="mid"><a href="plat/nouveau">Nouveaux-plats</a></li>
+                <li class="mid"><a class="focus" href="restaurant/commande">Commande</a></li>
+                <li class="mid"><a href="Connexion">Benefices</a></li>
                 <li class="mid"><a (click)="deconnexion()">Deconnexion</a></li>
             </ul>
         </nav>
@@ -31,19 +33,18 @@
     <table class="content-table">
         <thead>
           <tr>
-              <th>Image</th>
-              <th>Nom</th>
-              <th>Prix</th>
-              <th>Quantite</th>
+            <th>Plat</th>
+            <th>quantite</th>
+            <th>Prix</th>
+            <th>Client</th>
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let plat of plats">
-                <td>{{ plat.image }}</td>
-                <td>{{ plat.nom }}</td>
-                <td>{{ plat.prixVente }}</td>
-                <td><input id="quantite" type="number" [formControl]="quantite" placeholder=0/></td>
-                <td><a (click)="onsubmit(plat)">Commander</a></td>
+            <tr *ngFor="let commande of commandes">
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.quantite }}</td>
+                <td>{{ commande.prixUnitaire*commande.quantite }}</td>
+                <td>{{ commande.Client }}</td>
             </tr>
         </tbody>
         </table>
@@ -56,14 +57,6 @@
         <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
     </footer>
 
-    <script type="text/javascript ">
-        $(document).ready(function($) {
-            $('.menu-toggle').click(function() {
-                $('.menu-toggle').toggleClass('active');
-                $('nav').toggleClass('active');
-            });
-        });
-    </script>
 </body>
 
 </html>

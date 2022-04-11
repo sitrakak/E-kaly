@@ -1,7 +1,9 @@
 export interface ICommande {
   _id?: string;
   idClient : string;
+  Client : string;
   idPlat : string;
+  idResto : string;
   nom :string;
   quantite : number;
   prixUnitaire : number;
@@ -13,7 +15,9 @@ export interface ICommande {
 export class Commande implements ICommande {
   constructor(
     public idClient : string,
+    public Client : string,
     public idPlat : string,
+    public idResto : string,
     public nom :string,
     public quantite : number,
     public prixUnitaire : number,
@@ -24,7 +28,9 @@ export class Commande implements ICommande {
   ) {
     this._id = _id ? _id : null;
     this.idClient = idClient;
+    this.Client = Client;
     this.idPlat = idPlat;
+    this.idResto = idResto;
     this.nom = nom;
     this.quantite =quantite;
     this.prixUnitaire =prixUnitaire;

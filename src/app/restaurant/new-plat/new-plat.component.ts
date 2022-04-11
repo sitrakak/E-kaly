@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {Router} from "@angular/router";
+import * as $ from 'jquery';
 import { IPlat,Plat } from 'src/app/entities/plat/plat.model';
 import { PlatService } from 'src/app/entities/plat/plat.service';
 import { UserService } from 'src/app/entities/user/user.service';
@@ -30,7 +31,7 @@ export class NewPlatComponent implements OnInit {
       $('.menu-toggle').toggleClass('active');
       $('nav').toggleClass('active');
     });
-    let item= JSON.parse(localStorage.getItem("token_client"));
+    let item= JSON.parse(localStorage.getItem("token_resto"));
     if (!item) {
       this.router.navigate(['/login']);
     } else {
@@ -46,7 +47,8 @@ export class NewPlatComponent implements OnInit {
 
   // Manage the submit action and create the new Plat.
   onSubmit() {
-    const plat = new Plat(null,this.PlatForm.value['nom'], this.PlatForm.value['prixRevient'],this.PlatForm.value['prixVente'], this.PlatForm.value['visible'], this.id_user, null);
+    if(this.PlatForm.value['visible']=="true"){
+    const plat = new Plat(null,this.PlatForm.value['nom'], this.PlatForm.value['prixRevient'],this.PlatForm.value['prixVente'], true, this.id_user, null);
       this.PlatService.create(plat).then((result: IPlat) => {
         if (result === undefined) {
           this.error = true;
@@ -55,7 +57,18 @@ export class NewPlatComponent implements OnInit {
           this.createdPlat.emit(result);
         }
       });
-        //this.router.navigate(['/restaurant']);
+    }else{
+      const plat = new Plat(null,this.PlatForm.value['nom'], this.PlatForm.value['prixRevient'],this.PlatForm.value['prixVente'], false, this.id_user, null);
+        this.PlatService.create(plat).then((result: IPlat) => {
+          if (result === undefined) {
+            this.error = true;
+          } else {
+            this.error = false;
+            this.createdPlat.emit(result);
+          }
+        });
+      }
+    this.router.navigate(['/restaurant']);
     
   }
 

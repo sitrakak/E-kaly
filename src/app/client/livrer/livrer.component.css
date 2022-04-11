@@ -227,7 +227,7 @@ footer p {
         position: absolute;
         width: 100%;
         top: 92px;
-        height: 210px;
+        height: 140px;
         background-color: white;
     }
     nav.active ul {
@@ -245,6 +245,10 @@ footer p {
         text-align: center;
         margin-top: -20px;
         padding: 15px;
+    }
+    nav ul li a.focus{
+        background-color: #013d51;
+        color: white;
     }
     nav.active ul li a:hover {
         background-color: #013d51;
