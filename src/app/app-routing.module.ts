@@ -7,6 +7,7 @@ import { LivrerComponent } from './client/livrer/livrer.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { LivreurComponent } from './livreur/livreur.component';
 import { LoginComponent } from './login/login.component';
+import { BeneficeComponent } from './restaurant/benefice/benefice.component';
 import { CommandeRestaurantComponent } from './restaurant/commande/commande.component';
 import { RestaurantComponent } from './restaurant/liste-plat/restaurant.component';
 import { NewPlatComponent } from './restaurant/new-plat/new-plat.component';
@@ -24,9 +25,9 @@ const routes: Routes = [
   {path:'plat/nouveau',component:NewPlatComponent},
   {path:'inscription',component:InscriptionComponent},
   {path:'commande-en-cours',component:LivrerComponent},
-  {path:'restaurant/commande',component:CommandeRestaurantComponent}
-];
-
+  {path:'restaurant/commande',component:CommandeRestaurantComponent},
+  {path:'restaurant/benefice',component:BeneficeComponent}
+]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

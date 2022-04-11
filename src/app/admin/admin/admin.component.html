@@ -13,12 +13,14 @@
 <body>
     <!-- HEADER -->
     <header>
-        <a href="restaurant" class="logo">Admin</a>
+        <a href="admin" class="logo">Admin</a>
         <div class="menu-toggle"></div>
         <nav>
             <ul>
-                <li><a class="focus" href="client">Commander</a></li>
-                <li class="mid"><a href="commande-en-cours">Commande en cours</a></li>
+                <li><a class="focus" href="admin">Commandes</a></li>
+                <li class="mid"><a href="admin/resto">Restaurant</a></li>
+                <li class="mid"><a href="admin/resto">Livreur</a></li>
+                <li class="mid"><a href="admin/benefice">Benefice</a></li>
                 <li class="mid"><a (click)="deconnexion()">Deconnexion</a></li>
             </ul>
         </nav>
@@ -35,6 +37,7 @@
               <th>quantite</th>
               <th>Prix</th>
               <th>Client</th>
+              <th>livreur</th>
             </tr>
           </thead>
           <tbody>

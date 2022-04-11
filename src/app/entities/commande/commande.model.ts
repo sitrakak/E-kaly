@@ -7,6 +7,7 @@ export interface ICommande {
   nom :string;
   quantite : number;
   prixUnitaire : number;
+  prixRevient : number;
   livrer: boolean;
   livreur: string;
   date : Date;
@@ -21,6 +22,7 @@ export class Commande implements ICommande {
     public nom :string,
     public quantite : number,
     public prixUnitaire : number,
+    public prixRevient : number,
     public livrer: boolean,
     public livreur: string,
     public date : Date,
@@ -34,6 +36,7 @@ export class Commande implements ICommande {
     this.nom = nom;
     this.quantite =quantite;
     this.prixUnitaire =prixUnitaire;
+    this.prixRevient =prixRevient;
     this.livrer =livrer;
     this.livreur =livreur;
     this.date =date;

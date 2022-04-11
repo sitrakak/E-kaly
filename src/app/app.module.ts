@@ -17,6 +17,7 @@ import { LivreurComponent } from './livreur/livreur.component';
 import { CommandeComponent } from './client/commande/commande.component';
 import { CommandeRestaurantComponent } from './restaurant/commande/commande.component';
 import { LivrerComponent } from './client/livrer/livrer.component';
+import { BeneficeComponent } from './restaurant/benefice/benefice.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LivrerComponent } from './client/livrer/livrer.component';
     LivreurComponent,
     CommandeComponent,
     CommandeRestaurantComponent,
-    LivrerComponent
+    LivrerComponent,
+    BeneficeComponent
   ],
   imports: [
     BrowserModule,

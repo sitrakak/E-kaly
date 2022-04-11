@@ -228,6 +228,25 @@ app.get("/api/commande/assigner/:id/:livreur",function(req, res) {
     });
 });
 
+app.get("/api/commande/benefice/:id", function(req, res) {
+    var id = req.params.id;
+    var ObjectID = require('mongodb').ObjectID;
+    database.collection('commande').aggregate([
+        {
+            $match: { idResto: id }
+        },
+        {
+           $group: { _id: "$nom", quantite: { $sum: "$quantite"}, totalRevient: { $sum: "$prixRevient"}, totalPrix: { $sum: "$prixUnitaire"}}
+        }
+    ]).toArray(function(error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json(data);
+        }
+    });
+});
+
 //Get commande en cours client
 app.get("/api/commande/:idClient", function(req, res) {
     var id = req.params.idClient;

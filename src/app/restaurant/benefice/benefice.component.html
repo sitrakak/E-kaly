@@ -19,8 +19,8 @@
             <ul>
                 <li><a href="restaurant">Plats</a></li>
                 <li class="mid"><a href="plat/nouveau">Nouveaux-plats</a></li>
-                <li class="mid"><a class="focus" href="restaurant/commande">Commande</a></li>
-                <li class="mid"><a href="restaurant/benefice">Benefices</a></li>
+                <li class="mid"><a href="restaurant/commande">Commande</a></li>
+                <li class="mid"><a class="focus" href="restaurant/benefice">Benefices</a></li>
                 <li class="mid"><a (click)="deconnexion()">Deconnexion</a></li>
             </ul>
         </nav>
@@ -34,17 +34,15 @@
         <thead>
           <tr>
             <th>Plat</th>
-            <th>quantite</th>
-            <th>Prix</th>
-            <th>Client</th>
+            <th>Quantite vendu</th>
+            <th>Benefice</th>
           </tr>
         </thead>
         <tbody>
             <tr *ngFor="let commande of commandes">
-                <td>{{ commande.nom }}</td>
-                <td>{{ commande.quantite }}</td>
-                <td>{{ commande.prixUnitaire*commande.quantite }}</td>
-                <td>{{ commande.Client }}</td>
+                <td>{{ commande._id }}</td>
+                <td>{{ commande.quantite}}</td>
+                <td>{{ (commande.quantite*commande.totalPrix)-(commande.quantite*commande.totalRevient)}}</td>
             </tr>
         </tbody>
         </table>
