@@ -72,8 +72,8 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || LOCAL_DATABASE, {
     });
 });
 
-app.get('/login', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/login/:email', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/login', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/plat/nouveau', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/restaurant', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/inscription', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));

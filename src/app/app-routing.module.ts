@@ -16,8 +16,8 @@ import { NewPlatComponent } from './restaurant/new-plat/new-plat.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  {path:'login',component:LoginComponent},
   {path:'login/:email',component:LoginComponent},
+  {path:'login',component:LoginComponent},
   {path:'restaurant',component:RestaurantComponent},
   {path:'client',component:ClientComponent},
   {path:'commande/:id',component:CommandeComponent},

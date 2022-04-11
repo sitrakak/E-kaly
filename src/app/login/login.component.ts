@@ -23,8 +23,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     let mail=this.activatedRoute.snapshot.params["email"];
+    if(mail!=null){
       this.UserService.validercompte(mail);
       this.router.navigate(['/login']);
+    }
   }
   onSubmit(){
     const user =new LoginUser(this.UserForm.value['email'],this.UserForm.value['mdp']);
