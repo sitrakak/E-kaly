@@ -29,7 +29,7 @@ const routes: Routes = [
   {path:'restaurant/commande',component:CommandeRestaurantComponent},
   {path:'restaurant/benefice',component:BeneficeComponent},
   {path:'admin/benefice',component:BeneficeRestoComponent}
-]
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
