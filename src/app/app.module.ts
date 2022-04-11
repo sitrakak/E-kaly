@@ -18,6 +18,7 @@ import { CommandeComponent } from './client/commande/commande.component';
 import { CommandeRestaurantComponent } from './restaurant/commande/commande.component';
 import { LivrerComponent } from './client/livrer/livrer.component';
 import { BeneficeComponent } from './restaurant/benefice/benefice.component';
+import { BeneficeRestoComponent } from './admin/benefice/benefice.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BeneficeComponent } from './restaurant/benefice/benefice.component';
     CommandeComponent,
     CommandeRestaurantComponent,
     LivrerComponent,
-    BeneficeComponent
+    BeneficeComponent,
+    BeneficeRestoComponent
   ],
   imports: [
     BrowserModule,

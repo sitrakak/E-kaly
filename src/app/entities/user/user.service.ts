@@ -88,6 +88,14 @@ export class UserService {
             .catch(this.error);
     }
 
+    //Resto by id
+    restoById(id: string): Promise<IUser> {
+        return this.http.get(`${this.UsersUrl}/resto/${id}`)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.error);
+    }
+
     //send Mail
     sendMail(User: User): Promise<IUser> {
         return this.http.post(`${this.UsersUrl}/sendmail`, User)

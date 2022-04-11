@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Livreur</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Hajanirivo Sitraka">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <a href="admin" class="logo">Admin</a>
+        <div class="menu-toggle"></div>
+        <nav>
+            <ul>
+                <li><a href="admin">Commandes</a></li>
+                <li class="mid"><a href="admin/resto">Restaurant</a></li>
+                <li class="mid"><a href="admin/livreur">Livreur</a></li>
+                <li class="mid"><a class="focus" href="admin/benefice">Benefice</a></li>
+                <li class="mid"><a (click)="deconnexion()">Deconnexion</a></li>
+            </ul>
+        </nav>
+        <div class="clearfix"></div>
+    </header>
+
+
+
+    <!-- BODY -->
+    <table class="content-table">
+        <thead>
+          <tr>
+            <th>Restaurant</th>
+            <th>Quantite vendu</th>
+            <th>Benefice</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let commande of commandes">
+                <td>{{ commande._id }}</td>
+                <td>{{ commande.quantite}}</td>
+                <td>{{ (commande.quantite*commande.totalPrix)-(commande.quantite*commande.totalRevient)}}</td>
+            </tr>
+        </tbody>
+        </table>
+    
+    <img class="footer">
+    
+
+
+    <footer>
+        <p>Copyright 2022 &copy; Hajanirivo Sitraka</p>
+    </footer>
+
+</body>
+
+</html>

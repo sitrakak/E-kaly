@@ -84,6 +84,8 @@ app.get('/commande/:id', (req, res) => res.sendFile(path.join(__dirname, '/dist/
 app.get('/commande-en-cours', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/restaurant/commande', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/livreur', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/admin/benefice', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/restaurant/benefice', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 
 /*  "/api/status"
  *   GET: Get server status
@@ -203,6 +205,16 @@ app.get("/api/plat/:idResto", function(req, res) {
     });
 });
 
+//Get resto by id 
+app.get('/api/user/resto/:id', (req, res) => {
+    var id = req.params.id;
+    var ObjectID = require('mongodb').ObjectID;
+    database.collection('user').findOne({ _id:new ObjectID(id)})
+        .then(result => {
+            res.status(200).json(result);
+        });
+});
+
 //Commander
 app.post("/api/commande", function(req, res) {
     var commande = req.body;
@@ -228,6 +240,7 @@ app.get("/api/commande/assigner/:id/:livreur",function(req, res) {
     });
 });
 
+//Benefice par plat
 app.get("/api/commande/benefice/:id", function(req, res) {
     var id = req.params.id;
     var ObjectID = require('mongodb').ObjectID;
@@ -237,6 +250,22 @@ app.get("/api/commande/benefice/:id", function(req, res) {
         },
         {
            $group: { _id: "$nom", quantite: { $sum: "$quantite"}, totalRevient: { $sum: "$prixRevient"}, totalPrix: { $sum: "$prixUnitaire"}}
+        }
+    ]).toArray(function(error, data) {
+        if (error) {
+            manageError(res, err.message, "Failed to get contacts.");
+        } else {
+            res.status(200).json(data);
+        }
+    });
+});
+
+//Benefice par resto
+app.get("/api/commande/beneficeResto", function(req, res) {
+    var ObjectID = require('mongodb').ObjectID;
+    database.collection('commande').aggregate([
+        {
+           $group: { _id: "$idResto", quantite: { $sum: "$quantite"}, totalRevient: { $sum: "$prixRevient"}, totalPrix: { $sum: "$prixUnitaire"}}
         }
     ]).toArray(function(error, data) {
         if (error) {

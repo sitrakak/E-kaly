@@ -17,9 +17,17 @@ export class CommandeService {
         .catch(this.error);
   }
 
-  //benefice
+  //benefice par plat
   benefice(id:string): Promise<Array<ICommande>> {
-    return this.http.get(`${this.CommandesUrl}/benefice//${id}`)
+    return this.http.get(`${this.CommandesUrl}/benefice/${id}`)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.error);
+  }
+
+  //benefice par resto
+  beneficeResto(): Promise<Array<ICommande>> {
+    return this.http.get(`${this.CommandesUrl}/beneficeResto`)
         .toPromise()
         .then(response => response.json())
         .catch(this.error);
