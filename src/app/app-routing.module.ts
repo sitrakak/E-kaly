@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin/admin.component';
 import { BeneficeRestoComponent } from './admin/benefice/benefice.component';
+import { LivreurAdminComponent } from './admin/livreur/livreur.component';
+import { RestoComponent } from './admin/resto/resto.component';
 import { ClientComponent } from './client/client/client.component';
 import { CommandeComponent } from './client/commande/commande.component';
 import { LivrerComponent } from './client/livrer/livrer.component';
@@ -28,7 +30,10 @@ const routes: Routes = [
   {path:'commande-en-cours',component:LivrerComponent},
   {path:'restaurant/commande',component:CommandeRestaurantComponent},
   {path:'restaurant/benefice',component:BeneficeComponent},
-  {path:'admin/benefice',component:BeneficeRestoComponent}
+  {path:'admin/benefice',component:BeneficeRestoComponent},
+  {path:'admin/resto',component:RestoComponent},
+  {path:'admin/livreur',component:LivreurAdminComponent},
+  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

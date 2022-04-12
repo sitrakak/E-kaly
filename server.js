@@ -85,6 +85,8 @@ app.get('/restaurant/commande', (req, res) => res.sendFile(path.join(__dirname, 
 app.get('/livreur', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/admin/benefice', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 app.get('/restaurant/benefice', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/admin/resto', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
+app.get('/admin/livreur', (req, res) => res.sendFile(path.join(__dirname, '/dist/node-express-angular/index.html')));
 
 /*  "/api/status"
  *   GET: Get server status
@@ -337,6 +339,8 @@ app.get("/api/user", function(req, res) {
         }
     });
 });
+
+
 
 //Delete user
 app.delete("/api/user/:id", function(req, res) {
